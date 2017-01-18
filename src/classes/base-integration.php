@@ -11,12 +11,12 @@ use Lift\Core\Interfaces\Integration;
 use Lift\Core\Interfaces\Provider;
 
 /**
- * Abstract Class: Integration
+ * Abstract Class: Base_Integration
  *
  * @since  v0.1.0
  * @see  Lift\Core\Interfaces\Integration
  */
-abstract class Integration implements Integration {
+abstract class Base_Integration implements Integration {
 
 	/**
 	 * Hook Catalog
