@@ -1,0 +1,14 @@
+{
+  "name": "liftux/plugins-core",
+  "description": "A PHP library of classes and interfaces used in the composition of WordPress plugins authored by Lift",
+  "authors":[
+    {
+      "name": "LiftUX and Contributors",
+      "homepage": "https://github.com/liftux/plugins-core/graphs/contributors"
+    }
+  ],
+  "require":{
+  },
+  "require-dev": {
+  }
+}
