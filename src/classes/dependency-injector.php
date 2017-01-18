@@ -83,7 +83,7 @@ class Dependency_Injector {
 	public function register_dependency( $reference, $dependency, $required = true ) {
 		$this->dependency[ $reference ] = $dependency;
 
-		if( $required ) {
+		if ( $required ) {
 			array_push( $this->required, $reference );
 		}
 

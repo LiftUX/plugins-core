@@ -15,7 +15,7 @@ namespace Lift\Core\Interfaces;
  *
  * @since  v0.1.0
  */
-interface Service{
+interface Service {
 
 	/**
 	 * Call
