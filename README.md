@@ -1,3 +1,5 @@
+[![LiftUX| A Digital Product Agency](http://lift.d.pr/j5MX/3XnSNyyf.jpg)](https://liftux.com)
+
 # Plugins Core
 
 A PHP library of classes and interfaces used in the composition of WordPress plugins authored by Lift
