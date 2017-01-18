@@ -25,6 +25,6 @@ interface Service{
 	 * @param  array  ...$args Arguments to configure the call.
 	 * @return mixed           Response from call.
 	 */
-	public function call( $type, ...$args );
+	public function call( string $type, ...$args );
 
 }

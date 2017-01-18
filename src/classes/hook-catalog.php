@@ -41,7 +41,7 @@ class Hook_Catalog {
 	 * @since  v0.1.0
 	 * @return Hook_Definition[]
 	 */
-	public function get_catalog_entries() {
+	public function get_catalog_entries() : array {
 		return $this->entries;
 	}
 
@@ -52,7 +52,7 @@ class Hook_Catalog {
 	 * @param Hook_Definition $entry HookDefinition to add to catalog.
 	 * @return  Hook_Definition[]	An array of the stored HookDefinitions
 	 */
-	public function add_entry( Hook_Definition $entry ) {
+	public function add_entry( Hook_Definition $entry ) : array {
 		array_push( $this->entries, $entry->add() );
 		return $this->entries;
 	}
@@ -65,7 +65,7 @@ class Hook_Catalog {
 	 * @param  callable $callable The callable function/method hooked to the tag.
 	 * @return Hook_Definition[]   An array of the stored HookDefinitions
 	 */
-	public function remove_entry( $tag, $callable ) {
+	public function remove_entry( string $tag, callable $callable ) : array {
 		return $this->entries = array_filter(
 			$this->entries,
 			function ( Hook_Definition $entry ) use ( $tag, $callable ) {

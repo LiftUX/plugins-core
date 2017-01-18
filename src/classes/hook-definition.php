@@ -62,7 +62,7 @@ class Hook_Definition {
 	 * @param int|integer $args     The number of arguments to pass to the function.
 	 * @return  self instance
 	 */
-	public function __construct( $tag, $callable, $priority = 10, $args = 1 ) {
+	public function __construct( string $tag, callable $callable, int $priority = 10, int $args = 1 ) {
 		$this->tag = $tag;
 		$this->callable = $callable;
 		$this->priority = $priority;
@@ -77,7 +77,7 @@ class Hook_Definition {
 	 * @since  v0.1.0
 	 * @return  self instance
 	 */
-	public function add() {
+	public function add() : Hook_Definition {
 		add_filter( $this->tag, $this->callable, $this->priority, $this->args );
 		$this->added = true;
 		return $this;
@@ -89,7 +89,7 @@ class Hook_Definition {
 	 * @since  v0.1.0
 	 * @return self Instance
 	 */
-	public function remove() {
+	public function remove() : Hook_Definition {
 		remove_filter( $this->tag, $this->callable, $this->priority, $this->args );
 		$this->added = false;
 		return $this;

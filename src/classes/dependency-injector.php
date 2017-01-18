@@ -52,7 +52,7 @@ class Dependency_Injector {
 	 * @since  v0.1.0
 	 * @return Dependency_Injector Instance of self
 	 */
-	public function setup() {
+	public function setup() : Dependency_Injector {
 		$this->register_dependency( 'hook_catalog', new Hook_Catalog, true );
 		return $this;
 	}
@@ -64,7 +64,7 @@ class Dependency_Injector {
 	 * @param  string $reference  Dependency Reference.
 	 * @return mixed|null             The dependency
 	 */
-	public function inject( $reference ) {
+	public function inject( string $reference ) {
 		if ( array_key_exists( $reference, $this->dependencies ) ) {
 			return $this->dependencies[ $reference ];
 		}
@@ -75,16 +75,16 @@ class Dependency_Injector {
 	 * Register Dependency
 	 *
 	 * @since  v0.1.0
-	 * @param  string $reference   String to reference the dependency by.
-	 * @param  mixed  $dependency  The class to register.
-	 * @param  bool   $required    Whether the dependency should be required.
+	 * @param  string $ref  String to reference the dependency by.
+	 * @param  mixed  $dep  The thing to register.
+	 * @param  bool   $req  Whether the dependency should be required.
 	 * @return Dependency_Injector Instance of self
 	 */
-	public function register_dependency( $reference, $dependency, $required = true ) {
-		$this->dependency[ $reference ] = $dependency;
+	public function register_dependency( string $ref, $dep, bool $req = true ) : Dependency_Injector {
+		$this->dependency[ $ref ] = $dep;
 
-		if( $required ) {
-			array_push( $this->required, $reference );
+		if( $req ) {
+			array_push( $this->required, $ref );
 		}
 
 		return $this;
@@ -96,7 +96,7 @@ class Dependency_Injector {
 	 * @since  v0.1.0
 	 * @return bool True if all required dependencies can be resolved, false otherwise.
 	 */
-	public function ensure_dependencies() {
+	public function ensure_dependencies() : bool {
 		foreach ( $this->required as $req_dep ) {
 			if ( ! isset( $this->dependencies[ $req_dep ] ) || is_null( $this->dependencies[ $req_dep ] ) ) {
 				return false;

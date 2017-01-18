@@ -51,5 +51,5 @@ interface Integration {
 	 *
 	 * @return  mixed
 	 */
-	public function add_hook( $tag, $callable, $priority, $args );
+	public function add_hook( int $tag, callable $callable, int $priority, int $args );
 }

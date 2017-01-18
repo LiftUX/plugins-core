@@ -48,9 +48,9 @@ abstract class Base_Integration implements Integration {
 	 * are required.
 	 *
 	 * @since v2.0.0
-	 * @return  array An array of integration method names that were added
+	 * @return  Base_Integration Instance of self
 	 */
-	public function add_all_hooks() {
+	public function add_all_hooks() : Base_Integration {
 		$integrations = array_filter( get_class_methods( $this ), function( $method ) {
 			return ( strpos( $method, 'maybe_' ) === 0 || strpos( $method, 'must_' ) === 0 );
 		});
@@ -70,7 +70,7 @@ abstract class Base_Integration implements Integration {
 	 * @since  v2.0.0
 	 * @return array An array of integrations added by class within the HookCatalog
 	 */
-	public function get_all_hooks() {
+	public function get_all_hooks() : array {
 		return array_filter( $this->hook_catalog->entries, function( $entry ) use ( $class ) {;
 			return ( get_class( $entry->callable[0] ) === $this );
 		});
@@ -87,7 +87,7 @@ abstract class Base_Integration implements Integration {
 	 *
 	 * @return  bool True if the Hook_Definition describing integration was added to HookCatalog
 	 */
-	public function add_hook( $tag, $method, $priority = 10, $args = 1 ) {
+	public function add_hook( string $tag, string $method, int $priority = 10, int $args = 1 ) : bool {
 		$definition = new Hook_Definition( $tag, array( $this, $method ), $priority, $args );
 		$this->hook_catalog->add_entry( $definition );
 		return true;
@@ -96,11 +96,12 @@ abstract class Base_Integration implements Integration {
 	/**
 	 * Helper: Should we continue execution in save_post hook?
 	 *
+	 * @todo   Get this out of here.
 	 * @since  v0.1.0
 	 * @param  int $post_id WP_Post ID.
 	 * @return bool            True if execution should cease, false otherwise.
 	 */
-	final protected static function _save_post_hook_should_cease_execution( $post_id ) {
+	final protected static function _save_post_hook_should_cease_execution( int $post_id ) : bool {
 		// Autosave, do nothing.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return true;
