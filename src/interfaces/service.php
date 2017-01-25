@@ -21,10 +21,10 @@ interface Service {
 	 * Call
 	 *
 	 * @since  v.0.1.0
-	 * @param  string $type    The type of call to make.
+	 * @param  string $method  The method of call to make.
 	 * @param  array  ...$args Arguments to configure the call.
 	 * @return mixed           Response from call.
 	 */
-	public function call( string $type, ...$args );
+	public function call( string $method, ...$args );
 
 }
