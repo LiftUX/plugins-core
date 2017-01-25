@@ -133,7 +133,7 @@ trait Sub_Menu {
 	 *
 	 * @return self
 	 */
-	public function add_submenu_section( $sid = 'main', $label = 'Options', $callback = '\__return_false' ) {
+	public function add_submenu_section( string $sid = 'main', string $label = 'Options',  callable $callback = '\__return_false' ) {
 		add_settings_section( $sid, $label, $callback, $this->hook_suffix );
 		array_push( $this->submenu_page_sections, $sid );
 		return $this;
@@ -152,7 +152,7 @@ trait Sub_Menu {
 	 *
 	 * @return  void
 	 */
-	public function add_submenu_field( $option, $type, $key, $label, $opts = array() ) {
+	public function add_submenu_field( string $option, $type, string $key, string $label, array $opts = array() ) {
 		$args = func_get_args();
 		add_settings_field(
 			$key,
@@ -177,7 +177,7 @@ trait Sub_Menu {
 	 * @param  string       $key    The option key.
 	 * @return void
 	 */
-	public function render_field( $option, $type, $key ) {
+	public function render_field( string $option, $type, string $key ) {
 
 		if ( is_array( $type ) ) {
 			$node_type = reset( $type );
@@ -204,7 +204,7 @@ trait Sub_Menu {
 	 * @param  string $key    The option key.
 	 * @return void
 	 */
-	public function render_field_input( $type, $option, $key ) {
+	public function render_field_input( string $type, string $option, string $key ) {
 		$options = get_option( $option );
 		$value = isset( $options[ $key ] ) ? $options[ $key ] : '';
 		echo sprintf(
