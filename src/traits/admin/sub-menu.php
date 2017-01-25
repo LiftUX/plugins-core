@@ -63,7 +63,7 @@ trait Sub_Menu {
 	 * @param  string $property Property to get.
 	 * @return mixed|null       Value of property or null
 	 */
-	public function get_submenu_page( $property ) {
+	public function get_submenu_page( string $property ) {
 		$prefixed = 'submenu_page_' . $property;
 		if ( property_exists( $this, $prefixed ) ) {
 			return $this->$prefixed;
@@ -78,7 +78,7 @@ trait Sub_Menu {
 	 * @param mixed  $value    Value.
 	 * @return mixed Value
 	 */
-	public function set_submenu_page( $property, $value ) {
+	public function set_submenu_page( string $property, $value ) {
 		$prefixed = 'submenu_page_' . $property;
 		if ( property_exists( $this, $prefixed ) ) {
 			return $this->$prefixed = $value;
