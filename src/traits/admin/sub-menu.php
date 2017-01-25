@@ -133,7 +133,7 @@ trait Sub_Menu {
 	 *
 	 * @return self
 	 */
-	public function add_submenu_section( string $sid = 'main', string $label = 'Options',  callable $callback = '\__return_false' ) {
+	public function add_submenu_section( string $sid = 'main', string $label = 'Options', callable $callback = '\__return_false' ) {
 		add_settings_section( $sid, $label, $callback, $this->hook_suffix );
 		array_push( $this->submenu_page_sections, $sid );
 		return $this;
