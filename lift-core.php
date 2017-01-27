@@ -10,5 +10,7 @@
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package         Lift_Core
+ * @package         Lift\Core
  */
+
+namespace Lift\Core;
