@@ -77,13 +77,13 @@ class Dependency_Injector {
 	 * @since  v0.1.0
 	 * @param  string $reference   String to reference the dependency by.
 	 * @param  mixed  $dependency  The class to register.
-	 * @param  bool   $required    Whether the dependency should be required.
+	 * @param  bool   $require     Whether the dependency should be required.
 	 * @return Dependency_Injector Instance of self
 	 */
-	public function register_dependency( $reference, $dependency, $required = true ) {
+	public function register_dependency( $reference, $dependency, $require ) {
 		$this->dependency[ $reference ] = $dependency;
 
-		if ( $required ) {
+		if ( true === $require ) {
 			array_push( $this->required, $reference );
 		}
 
@@ -97,10 +97,24 @@ class Dependency_Injector {
 	 * @return bool True if all required dependencies can be resolved, false otherwise.
 	 */
 	public function ensure_dependencies() {
-		foreach ( $this->required as $req_dep ) {
-			if ( ! isset( $this->dependencies[ $req_dep ] ) || is_null( $this->dependencies[ $req_dep ] ) ) {
+		foreach ( $this->required as $required_dependency ) {
+			if ( ! $this->ensure_dependency( $required_dependency ) ) {
 				return false;
 			}
+		}
+		return true;
+	}
+
+	/**
+	 * Ensure Dependency
+	 *
+	 * @since  v0.1.0
+	 * @param  string $reference Reference to the dependency.
+	 * @return bool              Whether the dependency is mapped
+	 */
+	public function ensure_dependency( $reference ) {
+		if ( ! isset( $this->dependencies[ $reference ] ) || is_null( $this->dependencies[ $reference ] ) ) {
+			return false;
 		}
 		return true;
 	}
