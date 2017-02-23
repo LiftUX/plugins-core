@@ -1,5 +1,5 @@
 {
-  "name": "liftux/liftux-core",
+  "name": "liftux/plugins-core",
   "description": "A PHP library of classes and interfaces used in the composition of WordPress plugins authored by Lift",
   "type": "wordpress-muplugin",
   "keywords": [
