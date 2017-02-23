@@ -12,3 +12,4 @@ dependencies:
 test:
   override:
     - phpcs --standard=phpcs.ruleset.xml $(find ./src -name '*.php')
+    - phpunit
