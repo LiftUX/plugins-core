@@ -23,7 +23,7 @@ abstract class Base_Integration implements Integration {
 	 *
 	 * @var Hook_Catalog
 	 */
-	protected $hook_catalog;
+	public $hook_catalog;
 
 	/**
 	 * Constructor
@@ -33,7 +33,7 @@ abstract class Base_Integration implements Integration {
 	 *
 	 * @return  Integration Instance of self
 	 */
-	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers ) {
+	public function __construct( Hook_Catalog $hook_catalog, array ...$providers ) {
 		$this->hook_catalog = $hook_catalog;
 		return $this;
 	}
@@ -71,8 +71,8 @@ abstract class Base_Integration implements Integration {
 	 * @return array An array of integrations added by class within the HookCatalog
 	 */
 	public function get_all_hooks() : array {
-		return array_filter( $this->hook_catalog->entries, function( $entry ) use ( $class ) {;
-			return ( get_class( $entry->callable[0] ) === $this );
+		return array_filter( $this->hook_catalog->entries, function( $entry ) {
+			return ( $entry->callable[0] instanceof $this );
 		});
 	}
 
@@ -94,31 +94,18 @@ abstract class Base_Integration implements Integration {
 	}
 
 	/**
-	 * Helper: Should we continue execution in save_post hook?
+	 * Remove Integration
 	 *
-	 * @todo   Get this out of here.
-	 * @since  v0.1.0
-	 * @param  int $post_id WP_Post ID.
-	 * @return bool            True if execution should cease, false otherwise.
+	 * @since v2.0.0
+	 * @param string      $tag      String reference to the hook to apply function to.
+	 * @param string      $method   Method to hook to $tag.
+	 * @param int|integer $priority Priority in which it should run, default 10.
+	 * @param int|integer $args     Number of arguments to pass to the method, default 1.
+	 *
+	 * @return  bool True if the Hook_Definition describing integration was remove to HookCatalog
 	 */
-	final protected static function _save_post_hook_should_cease_execution( int $post_id ) : bool {
-		// Autosave, do nothing.
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return true;
-		}
-		// AJAX? Not used here.
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return true;
-		}
-		// Check user permissions.
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return true;
-		}
-		// Return if it's a post revision.
-		if ( false !== wp_is_post_revision( $post_id ) ) {
-			return true;
-		}
-
-		return false;
+	public function remove_hook( string $tag, string $method, int $priority = 10, int $args = 1 ) : bool {
+		$this->hook_catalog->remove_entry( $tag, array( $this, $method ) );
+		return true;
 	}
 }

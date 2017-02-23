@@ -22,7 +22,7 @@ interface Integration {
 	 * @param Hook_Catalog     $hook_catalog Hook Catalog instance.
 	 * @param array|Provider[] ...$providers Variadic of Providers.
 	 */
-	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers );
+	public function __construct( Hook_Catalog $hook_catalog, array ...$providers );
 
 	/**
 	 * Get All Hooks
@@ -44,12 +44,12 @@ interface Integration {
 	 *
 	 * @since v0.1.0
 	 *
-	 * @param int      $tag      Tag.
-	 * @param callable $callable Callable function.
-	 * @param int      $priority Priority.
-	 * @param int      $args     Number of arguments.
+	 * @param int    $tag      Tag.
+	 * @param string $method   Callable function.
+	 * @param int    $priority Priority.
+	 * @param int    $args     Number of arguments.
 	 *
 	 * @return  mixed
 	 */
-	public function add_hook( int $tag, callable $callable, int $priority, int $args );
+	public function add_hook( string $tag, string $method, int $priority = 10, int $args = 1 );
 }

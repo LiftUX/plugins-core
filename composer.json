@@ -20,8 +20,10 @@
     "composer/installers": "v1.*"
   },
   "require-dev": {
+    "10up/wp_mock": "dev-dev"
   },
   "autoload": {
-    "classmap": [ "src/"]
+    "classmap": [ "src/" ],
+    "files": [ "src/functions/functions-runtime.php" ]
   }
 }

@@ -81,7 +81,7 @@ class Dependency_Injector {
 	 * @return Dependency_Injector Instance of self
 	 */
 	public function register_dependency( string $reference, $dependency, bool $require ) : Dependency_Injector {
-		$this->dependency[ $reference ] = $dependency;
+		$this->dependencies[ $reference ] = $dependency;
 
 		if ( true === $require ) {
 			array_push( $this->required, $reference );
