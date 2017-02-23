@@ -1,5 +1,4 @@
 coverage/
-tests/
 vendor/
 .DS_Store
 *.log
