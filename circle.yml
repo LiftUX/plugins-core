@@ -11,4 +11,4 @@ dependencies:
     - composer update --no-dev --no-interaction
 test:
   override:
-    - phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+    - phpcs --standard=phpcs.ruleset.xml $(find ./src -name '*.php')
