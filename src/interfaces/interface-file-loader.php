@@ -41,6 +41,7 @@ interface File_Loader {
 
 	/**
 	 * Get Path
+	 *
 	 * @param  string $filename The directory or filename with path to retrieve.
 	 * @return string           The full path to the file.
 	 */

@@ -1,6 +1,9 @@
 <?php
 /**
  * Post Hook Utils
+ *
+ * @package  Lift\Core
+ * @subpackage  Traits
  */
 
 namespace Lift\Core\Traits\WP_Hook_Utils;
