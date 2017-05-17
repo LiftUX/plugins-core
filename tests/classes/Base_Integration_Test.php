@@ -1,8 +1,9 @@
 <?php
 
 use Lift\Core\Hook_Catalog;
+use PHPUnit\Framework\TestCase;
 
-class Base_Integration_Test extends PHPUnit_Framework_Testcase {
+class Base_Integration_Test extends TestCase {
 
 	public function setUp() {
 		$this->class = new Base_Integration_Extender( new Hook_Catalog );

@@ -2,8 +2,9 @@
 
 use Lift\Core\Hook_Catalog;
 use Lift\Core\Dependency_Injector;
+use PHPUnit\Framework\TestCase;
 
-class Dependency_Injector_Test extends PHPUnit_Framework_Testcase {
+class Dependency_Injector_Test extends TestCase {
 
 	public function setUp() {
 		$this->injection = new Base_Integration_Extender( new Hook_Catalog );
