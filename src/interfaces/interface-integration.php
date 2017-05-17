@@ -9,12 +9,13 @@
  */
 
 namespace Lift\Core\Interfaces;
+
 use Lift\Core\Hook_Catalog;
 
 /**
  * Interface: Integration
  */
-interface Integration {
+interface Integration extends Subscriber {
 
 	/**
 	 * Constructor
@@ -22,34 +23,29 @@ interface Integration {
 	 * @param Hook_Catalog     $hook_catalog Hook Catalog instance.
 	 * @param array|Provider[] ...$providers Variadic of Providers.
 	 */
-	public function __construct( Hook_Catalog $hook_catalog, array ...$providers );
+	public function __construct( Hook_Catalog $hook_catalog, Provider ...$providers );
 
 	/**
-	 * Get All Hooks
+	 * Subscribe All
 	 *
 	 * @since  v0.1.0
 	 */
-	public function add_all_hooks();
+	public function add_subscriptions() : Subscriber;
 
 	/**
-	 * Get All Hooks
+	 * Get Subscriptions
 	 *
 	 * @since  v0.1.0
 	 * @return mixed
 	 */
-	public function get_all_hooks();
+	public function get_subscriptions();
 
 	/**
-	 * Add Hook
+	 * Extract Provider
 	 *
-	 * @since v0.1.0
-	 *
-	 * @param int    $tag      Tag.
-	 * @param string $method   Callable function.
-	 * @param int    $priority Priority.
-	 * @param int    $args     Number of arguments.
-	 *
-	 * @return  mixed
+	 * @param  string     $class     The fully qualified class name of the Provider to extract.
+	 * @param  Provider[] $providers An array of Providers.
+	 * @return mixed                 The Provider instance.
 	 */
-	public function add_hook( string $tag, string $method, int $priority = 10, int $args = 1 );
+	public function extract_provider( string $class, array $providers );
 }

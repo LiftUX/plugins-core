@@ -66,7 +66,8 @@ interface File_Loader {
 	/**
 	 * Failure handler
 	 *
+	 * @param  string $filename The filename to read contents from.
 	 * @return mixed
 	 */
-	public function handle_failure();
+	public function handle_failure( string $filename );
 }
