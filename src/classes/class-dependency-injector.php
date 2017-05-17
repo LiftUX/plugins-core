@@ -75,10 +75,10 @@ class Dependency_Injector {
 	 * Register Dependency
 	 *
 	 * @since  v0.1.0
-	 * @param  string $reference   String to reference the dependency by.
-	 * @param  mixed  $dependency  The class to register.
-	 * @param  bool   $require     Whether the dependency should be required.
-	 * @return Dependency_Injector Instance of self
+	 * @param  string       $reference  String to reference the dependency by.
+	 * @param  mixed        $dependency The class to register.
+	 * @param  bool|boolean $require    Whether the dependency should be required.
+	 * @return Dependency_Injector      Instance of self
 	 */
 	public function register_dependency( string $reference, $dependency, bool $require ) : Dependency_Injector {
 		$this->dependencies[ $reference ] = $dependency;
@@ -117,5 +117,18 @@ class Dependency_Injector {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Get Manifest
+	 *
+	 * @return array An associative array of dependency types keyed by their reference.
+	 */
+	public function get_manifest() {
+		$manifest = array();
+		foreach ( $this->dependencies as $reference => $dependency ) {
+			$manifest[ $reference ] = is_object( $dependency ) ? get_class( $dependency ) : gettype( $dependency );
+		}
+		return $manifest;
 	}
 }

@@ -66,7 +66,7 @@ class Hook_Catalog {
 	 * @return Hook_Definition[]   An array of the stored HookDefinitions
 	 */
 	public function remove_entry( string $tag, callable $callable ) : array {
-		return $this->entries = array_filter(
+		$this->entries = array_filter(
 			$this->entries,
 			function ( Hook_Definition $entry ) use ( $tag, $callable ) {
 				if ( $tag === $entry->tag && $callable === $entry->callable ) {
@@ -76,5 +76,6 @@ class Hook_Catalog {
 				return true;
 			}
 		);
+		return $this->entries;
 	}
 }
