@@ -19,8 +19,8 @@ trait Post_Hook_Utils {
 	 * Helper: Should we continue execution in save_post hook?
 	 *
 	 * @since  v0.1.0
-	 * @param  int $post_id WP_Post ID.
-	 * @return bool            True if execution should cease, false otherwise.
+	 * @param  int|integer $post_id WP_Post ID.
+	 * @return bool                 True if execution should cease, false otherwise.
 	 */
 	final protected static function _save_post_hook_should_cease_execution( int $post_id ) : bool {
 		// Autosave, do nothing.
