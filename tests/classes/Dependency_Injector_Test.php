@@ -56,4 +56,19 @@ class Dependency_Injector_Test extends PHPUnit_Framework_Testcase {
 
 		$this->assertFalse( $result );
 	}
+
+	public function test_get_manifest() {
+		$di = new Dependency_Injector;
+		$di->register_dependency( 'required_class', $this->injection, true );
+		$di->register_dependency( 'required_string', 'Hello World', true );
+
+		$expect = array (
+			'required_class' => Base_Integration_Extender::class,
+			'required_string' => 'string',
+		);
+
+		$manifest = $di->get_manifest();
+
+		$this->assertEquals( $expect, $manifest );
+	}
 }

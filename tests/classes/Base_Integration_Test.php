@@ -15,26 +15,26 @@ class Base_Integration_Test extends PHPUnit_Framework_Testcase {
 	public function test_add_hook() {
 		\WP_Mock::expectFilterAdded( 'test_add_hook', array( $this->class, 'no_autoload' ), 10, 1 );
 
-		$this->class->add_hook( 'test_add_hook', 'no_autoload', 10, 1 );
+		$this->class->subscribe( 'test_add_hook', array( $this->class, 'no_autoload' ), 10, 1 );
 
 		$this->assertEquals( 1, count( $this->class->hook_catalog->get_catalog_entries() ) );
 		$this->assertInstanceOf( 'Lift\\Core\\Hook_Definition', $this->class->hook_catalog->get_catalog_entries()[0] );
 	}
 
-	public function test_add_all_hooks() {
+	public function test_add_subscriptions() {
 
-		$this->class->add_all_hooks();
+		$this->class->add_subscriptions();
 
 		$this->assertEquals( 2, count( $this->class->hook_catalog->get_catalog_entries() ) );
 		$this->assertInstanceOf( 'Lift\\Core\\Hook_Definition', $this->class->hook_catalog->get_catalog_entries()[0] );
 	}
 
 	public function test_get_all_hooks() {
-		$this->assertTrue( empty( $this->class->get_all_hooks() ) );
+		$this->assertTrue( empty( $this->class->get_subscriptions() ) );
 
-		$this->class->add_all_hooks();
+		$this->class->add_subscriptions();
 
-		$this->assertFalse( empty( $this->class->get_all_hooks() ) );
+		$this->assertFalse( empty( $this->class->get_subscriptions() ) );
 	}
 
 	public function test_remove_hook() {
@@ -43,12 +43,12 @@ class Base_Integration_Test extends PHPUnit_Framework_Testcase {
 			'return_arg' => 0
 		) );
 
-		$this->class->add_hook( 'test_add_hook', 'no_autoload', 10, 1 );
+		$this->class->subscribe( 'test_add_hook', array( $this->class, 'no_autoload' ), 10, 1 );
 
 		$this->assertEquals( 1, count( $this->class->hook_catalog->get_catalog_entries() ) );
 
-		$this->class->remove_hook( 'test_add_hook', 'no_autoload', 10, 1 );
+		$this->class->unsubscribe( 'test_add_hook', array( $this->class, 'no_autoload' ), 10, 1 );
 
-		$this->assertTrue( empty( $this->class->get_all_hooks() ) );
+		$this->assertTrue( empty( $this->class->get_subscriptions() ) );
 	}
 }
