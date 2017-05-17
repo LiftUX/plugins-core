@@ -1,8 +1,9 @@
 <?php
 
 use Lift\Core\Functions\Runtime_Utils as lib;
+use PHPUnit\Framework\TestCase;
 
-class Runtime_Utils_Test extends PHPUnit_Framework_Testcase {
+class Runtime_Utils_Test extends TestCase {
 
 	public function test_const_compare() {
 		define( 'TEST_CONST_COMPARE', true );
