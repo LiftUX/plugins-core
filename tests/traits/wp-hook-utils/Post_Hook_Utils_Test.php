@@ -1,6 +1,7 @@
 <?php
+use PHPUnit\Framework\TestCase;
 
-class Post_Hook_Utils_Test extends PHPUnit_Framework_Testcase {
+class Post_Hook_Utils_Test extends TestCase {
 	use Lift\Core\Traits\WP_Hook_Utils\Post_Hook_Utils;
 
 	public function setUp() {
