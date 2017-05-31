@@ -59,7 +59,7 @@ trait Option_Access_Decorator {
 	 * @param  string $opt_group The parent option key.  If it doesn't exist, will be created.
 	 * @return Option_Access     A class implementing Option_Access.
 	 */
-	public function decorate_option_access( $opt_group ) : Option_Access {
+	public function decorate_option_access( string $opt_group ) : Option_Access {
 		$this->opt_group = $opt_group;
 		$this->options = get_option( $this->opt_group );
 
