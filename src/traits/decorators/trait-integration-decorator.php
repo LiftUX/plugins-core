@@ -142,7 +142,7 @@ trait Integration_Decorator {
 			if ( ( ! $carry instanceof $class ) && ( $item instanceof $class ) ) {
 				return $item;
 			}
-			return null;
+			return ( $carry instanceof $class ) ? $carry : null;
 		}, null );
 	}
 }
