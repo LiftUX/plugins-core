@@ -109,6 +109,12 @@ class Asset_Loader implements File_Loader {
 			$target = $path;
 		} elseif ( filter_var( $filename, FILTER_VALIDATE_URL ) ) {
 			$target = $filename;
+		} elseif ( 0 === strpos( $filename, preg_replace( '/^(https?:)/', '', home_url() ) ) ) {
+			$target = preg_replace(
+				[ '/(.local|.dev)/', '/^(\/\/)/' ],
+				[ '.com', 'https://' ],
+				$filename
+			);
 		}
 
 		if ( $target ) {
