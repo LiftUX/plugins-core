@@ -112,7 +112,7 @@ class Asset_Loader implements File_Loader {
 		} elseif ( 0 === strpos( $filename, preg_replace( '/^(https?:)/', '', home_url() ) ) ) {
 			$target = preg_replace(
 				[ '/(.local|.dev)/', '/^(\/\/)/' ],
-				[ '.com', 'https://' ],
+				[ '.com', 'https://pre.' ],
 				$filename
 			);
 		}
