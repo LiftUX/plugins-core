@@ -50,7 +50,7 @@ class Hook_Catalog {
 	 *
 	 * @since  v0.1.0
 	 * @param Hook_Definition $entry HookDefinition to add to catalog.
-	 * @return  Hook_Definition[]	An array of the stored HookDefinitions
+	 * @return  Hook_Definition[]   An array of the stored HookDefinitions
 	 */
 	public function add_entry( Hook_Definition $entry ) : array {
 		array_push( $this->entries, $entry->add() );

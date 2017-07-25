@@ -71,9 +71,11 @@ trait Integration_Decorator {
 	 * @return  Base_Integration Instance of self
 	 */
 	public function add_subscriptions() : Subscriber {
-		$integrations = array_filter( get_class_methods( $this ), function( $method ) {
-			return ( strpos( $method, 'maybe_' ) === 0 || strpos( $method, 'must_' ) === 0 );
-		});
+		$integrations = array_filter(
+			get_class_methods( $this ), function( $method ) {
+				return ( strpos( $method, 'maybe_' ) === 0 || strpos( $method, 'must_' ) === 0 );
+			}
+		);
 
 		$added_integrations = array();
 
@@ -91,9 +93,11 @@ trait Integration_Decorator {
 	 * @return array An array of integrations added by class within the HookCatalog
 	 */
 	public function get_subscriptions() : array {
-		return array_filter( $this->hook_catalog->entries, function( $entry ) {
-			return ( $entry->callable[0] instanceof $this );
-		});
+		return array_filter(
+			$this->hook_catalog->entries, function( $entry ) {
+				return ( $entry->callable[0] instanceof $this );
+			}
+		);
 	}
 
 	/**
@@ -138,11 +142,13 @@ trait Integration_Decorator {
 	 * @return mixed|null        The request provider, null if provider is not in the array of providers.
 	 */
 	public function extract_provider( string $class, array $providers ) {
-		return array_reduce( $providers, function( $carry, $item ) use ( $class ) {
-			if ( ( ! $carry instanceof $class ) && ( $item instanceof $class ) ) {
-				return $item;
-			}
-			return ( $carry instanceof $class ) ? $carry : null;
-		}, null );
+		return array_reduce(
+			$providers, function( $carry, $item ) use ( $class ) {
+				if ( ( ! $carry instanceof $class ) && ( $item instanceof $class ) ) {
+					return $item;
+				}
+				return ( $carry instanceof $class ) ? $carry : null;
+			}, null
+		);
 	}
 }
