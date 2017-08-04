@@ -166,9 +166,9 @@ trait Option_Access_Decorator {
 	public function defer( bool $defer ) {
 		$this->defer = $defer;
 		if ( $this->defer ) {
-			add_action( 'wp_shutdown', array( $this, 'save' ) );
+			add_action( 'shutdown', array( $this, 'save' ) );
 		} else {
-			remove_action( 'wp_shutdown', array( $this, 'save' ) );
+			remove_action( 'shutdown', array( $this, 'save' ) );
 		}
 	}
 
