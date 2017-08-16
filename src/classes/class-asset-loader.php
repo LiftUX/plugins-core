@@ -111,7 +111,9 @@ class Asset_Loader implements File_Loader {
 			$target = $filename;
 		}
 
-		if ( apply_filters( 'asset_loader_get_contents_target', $target ) ) {
+		$target = apply_filters( 'asset_loader_get_contents_target', $target, $filename );
+
+		if ( $target ) {
 			return call_user_func( apply_filters( 'lift_get_contents_fn', 'file_get_contents' ), $target );
 		}
 		return $this->handle_failure( strlen( $filename ) ? $filename : 'empty' );
