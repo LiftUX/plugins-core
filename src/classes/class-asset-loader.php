@@ -109,15 +109,9 @@ class Asset_Loader implements File_Loader {
 			$target = $path;
 		} elseif ( filter_var( $filename, FILTER_VALIDATE_URL ) ) {
 			$target = $filename;
-		} elseif ( 0 === strpos( $filename, preg_replace( '/^(https?:)/', '', home_url() ) ) ) {
-			$target = preg_replace(
-				[ '/(.local|.dev)/', '/^(\/\/)/' ],
-				[ '.com', 'https://pre.' ],
-				$filename
-			);
 		}
 
-		if ( $target ) {
+		if ( apply_filters( 'asset_loader_get_contents_target', $target ) ) {
 			return call_user_func( apply_filters( 'lift_get_contents_fn', 'file_get_contents' ), $target );
 		}
 		return $this->handle_failure( strlen( $filename ) ? $filename : 'empty' );
