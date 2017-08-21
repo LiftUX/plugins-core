@@ -109,6 +109,14 @@ class Asset_Loader implements File_Loader {
 			$target = $path;
 		} elseif ( filter_var( $filename, FILTER_VALIDATE_URL ) ) {
 			$target = $filename;
+		} else {
+			$parsed = parse_url( $filename );
+			if ( ! isset( $parsed['scheme'] ) ) {
+				$filename = 'https:' . $filename;
+				if ( filter_var( $filename, FILTER_VALIDATE_URL ) ) {
+					$target = $filename;
+				}
+			}
 		}
 
 		$target = apply_filters( 'asset_loader_get_contents_target', $target, $filename );
