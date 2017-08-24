@@ -68,6 +68,8 @@ trait Option_Access_Decorator {
 			add_option( $this->opt_group, $this->options );
 		}
 
+		add_filter( 'pre_update_option_' . $this->opt_group, array( $this, 'handle_external_updates' ), 10, 2 );
+
 		$this->dirty = false;
 		$this->defer( true );
 
@@ -182,6 +184,25 @@ trait Option_Access_Decorator {
 			update_option( $this->opt_group, $this->options );
 		}
 		return $this->options;
+	}
+
+	/**
+	 * Handle External Updates
+	 *
+	 * @filter
+	 * @param mixed $new_value The new value for the option.
+	 * @param mixed $old_value The old value for the option.
+	 * @return mixed
+	 */
+	public function handle_external_updates( $new_value, $old_value ) {
+		if ( ! $this->dirty ) {
+			return $new_value;
+		}
+
+		if ( is_array( $new_value ) ) {
+			$this->options = array_merge( $this->options, $new_value );
+			return $this->options;
+		}
 	}
 
 	/**
